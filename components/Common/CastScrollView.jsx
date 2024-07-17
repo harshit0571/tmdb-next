@@ -1,6 +1,6 @@
 import React from "react";
 import CastCard from "./CastCard";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import Loaderscroll from "../LoaderScroll";
 
 const CastScrollView = ({ casts }) => {
@@ -9,7 +9,7 @@ const CastScrollView = ({ casts }) => {
       <div className="flex gap-5 overflow-auto  ">
         {!casts && <Loaderscroll />}
         {casts?.map((cast) => (
-          <Link to={`/person/${cast.id}`}>
+          <Link href={`/person/${cast.id}`}>
             <CastCard
               profile_path={cast.profile_path}
               name={cast.name}

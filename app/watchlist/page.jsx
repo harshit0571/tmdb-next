@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect } from "react";
 import { useBookmark } from "@/context/BookmarksContext";
 import NotFound from "@/components/WatchList/NotFound";
@@ -14,7 +15,7 @@ const Bookmark = () => {
   useEffect(() => {
     const checkUser = () => {
       if (!user) {
-        navigation("/login");
+        navigation.push("/login");
       }
     };
     checkUser();

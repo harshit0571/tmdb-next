@@ -16,9 +16,7 @@ const PersonProvider = ({ children }) => {
   const getLists = async (api, setState) => {
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/${api}&api_key=${
-          process.env.VITE_TMDB_KEY
-        }`
+        `https://api.themoviedb.org/3/${api}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
       );
       setState(res.data);
     } catch (error) {

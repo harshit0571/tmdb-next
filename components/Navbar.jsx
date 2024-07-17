@@ -28,7 +28,7 @@ const Navbar = () => {
       <div className="w-[100%] lg:w-[85%] xl:w-[70%] flex md:justify-between p-3 md:items-baseline md:flex-row flex-col items-center justify-center md:gap-0 gap-5">
         <div className="flex items-center gap-5 md:flex-row flex-wrap justify-center">
           <div className="flex items-center ">
-            <Link to="/">
+            <Link href="/">
               <p className="text-3xl hover:bg-gradient-to-r from-cyan-500 to-cyan-300 tracking-wide font-bold text-transparent bg-clip-text bg-gradient cursor-pointer">
                 TMDB{" "}
               </p>
@@ -73,7 +73,7 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="bg-gradient px-2 rounded-lg cursor-pointer">
-              <Link to="/login"> Login</Link>
+              <Link href="/login"> Login</Link>
             </div>
           )}
 

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { getPathColor } from "../utils";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";

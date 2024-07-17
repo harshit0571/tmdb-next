@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Link } from "next";
@@ -44,7 +46,7 @@ const Footer = () => {
           alt="TMDB Logo"
         />
         <div className="py-2 px-5 cursor-pointer bg-white w-max rounded-lg text-cl text-cyan-400 font-bold">
-          {user ? "Hi " + user + "!" : <Link to="login">Login</Link>}
+          {user ? "Hi " + user + "!" : <Link href="login">Login</Link>}
         </div>
       </div>
       <div className="flex md:flex-row flex-wrap gap-10">

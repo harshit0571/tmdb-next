@@ -1,16 +1,17 @@
+"use client";
+
 import React from "react";
 import { Link } from "next/link";
 
 const SavedCard = ({ card, removeCard }) => {
   return (
-
     <li
       key={card.id}
       className="flex flex-col md:flex-row items-start p-4 bg-darkBlue rounded-lg shadow-md w-full md:w-[60%]"
     >
       <Link
         className="w-full m-auto flex flex-col md:flex-row items-start text-gray-100"
-        to={"/" + card.media_type + "/" + card.id}
+        href={"/" + card.media_type + "/" + card.id}
       >
         <img
           src={"https://image.tmdb.org/t/p/original/" + card.img}

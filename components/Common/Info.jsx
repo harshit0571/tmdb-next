@@ -1,10 +1,12 @@
+"use client";
+
 import React from "react";
-import { convertMinutesToHoursAndMinutes } from "../../utils";
+import { convertMinutesToHoursAndMinutes } from "@/utils";
 import ProgressCircle from "../ProgressCircle";
-import { useBookmark } from "../../context/BookmarksContext";
-import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { useFavorites } from "../../context/FavouritesContext";
+import { useBookmark } from "@/context/BookmarksContext";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+import { useFavorites } from "@/context/FavouritesContext";
 
 const MovieInfo = ({
   title,
@@ -22,7 +24,7 @@ const MovieInfo = ({
   const { user } = useAuth();
   const { addBookmark, removeBookmark, bookmarkExists } = useBookmark();
   const { addFavourite, removeFavourite, favouriteExists } = useFavorites();
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   return (
     <div className="flex-col gap-4 w-[100%] lg:w-[80%] text-white py-10">
@@ -123,14 +125,14 @@ const MovieInfo = ({
             class="fa fa-bookmark p-3 px-4 rounded-full bg-darkBlue hover:text-teal-400 hover:bg-slate-600 cursor-pointer "
             aria-hidden="true"
             onClick={() => {
-              navigate("/login");
+              navigate.push("/login");
             }}
           ></i>
           <i
             class="fa fa-heart p-3 rounded-full bg-darkBlue hover:bg-slate-600  hover:text-teal-400 cursor-pointer"
             aria-hidden="true"
             onClick={() => {
-              navigate("/login");
+              navigate.push("/login");
             }}
           ></i>
 

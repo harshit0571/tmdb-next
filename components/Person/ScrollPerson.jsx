@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
-import { usePerson } from "../../context/PersonContext";
+import { usePerson } from "@/context/PersonContext";
 import PersonCard from "./PersonCard";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const ScrollPerson = () => {
   const { personCredits } = usePerson();
@@ -12,7 +14,7 @@ const ScrollPerson = () => {
         {personCredits?.cast?.map(
           (cast) =>
             cast.poster_path && (
-              <Link to={cast?.title ? `/movie/${cast.id}` : `/tv/${cast.id}`}>
+              <Link href={cast?.title ? `/movie/${cast.id}` : `/tv/${cast.id}`}>
                 <PersonCard cast={cast} key={cast.id} />
               </Link>
             )

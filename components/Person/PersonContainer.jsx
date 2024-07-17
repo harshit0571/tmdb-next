@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { usePerson } from "../../context/PersonContext";
 import ProgressCircle from "../ProgressCircle";

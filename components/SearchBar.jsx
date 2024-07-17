@@ -1,3 +1,5 @@
+"use client";
+
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDebounce } from "../hooks/DebounceHook";
@@ -15,7 +17,7 @@ const SearchBar = ({ togglebar }) => {
   const getLists = async (api) => {
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/${api}&api_key=${process.env.VITE_TMDB_KEY}`
+        `https://api.themoviedb.org/3/${api}&api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
       );
       const limitedResults = res.data.results.slice(0, 10);
       setSearchesArray(limitedResults);
@@ -97,7 +99,7 @@ const SearchBar = ({ togglebar }) => {
                 return (
                   <Link
                     key={search.id}
-                    to={search.media_type + "/" + search.id}
+                    href={search.media_type + "/" + search.id}
                     className="w-full z-50"
                     onClick={() => {
                       console.log(search.media_type);

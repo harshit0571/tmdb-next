@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import oscar from "../assets/oscar.svg";
+import oscar from "@/assets/oscar.svg";
 
 export const Jumbotron = () => {
   return (
@@ -26,7 +28,10 @@ export const Jumbotron = () => {
       </div>
 
       <div className="bg-blueGradient w-full flex flex-col p-10 gap-7 md:items-start items-center">
-        <img src={oscar} className="w-[25%] min-w-[150px]" />
+        <img
+          src={"https://tmdb-beta-gray.vercel.app/assets/oscar-De4amE_r.svg"}
+          className="w-[25%] min-w-[150px]"
+        />
         <button className=" w-max p-2 px-4 text-white ring-2 ring-white rounded-3xl hover:ring-blue-400 hover:bg-white hover:text-blue-400">
           View the winners{" "}
           <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
