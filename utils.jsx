@@ -42,8 +42,4 @@ export const searchType = {
   ),
 };
 
-export const handleClickOutside = (event) => {
-  if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
-    setShowSearches(false);
-  }
-};
+

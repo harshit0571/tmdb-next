@@ -2,9 +2,9 @@
 
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useDebounce } from "../hooks/DebounceHook";
-import { Link } from "next";
-import { handleClickOutside, searchType } from "../utils";
+import { useDebounce } from "@/hooks/DebounceHook";
+import Link from "next/link";
+import { searchType } from "@/utils";
 
 const SearchBar = ({ togglebar }) => {
   const [showTrending, setShowTrending] = useState(true);
@@ -13,7 +13,11 @@ const SearchBar = ({ togglebar }) => {
   const [searchesArray, setSearchesArray] = useState([]);
   const searchBarRef = useRef(null);
   const debouncedSearch = useDebounce(searchValue);
-
+  const handleClickOutside = (event) => {
+    if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+      setShowSearches(true);
+    }
+  };
   const getLists = async (api) => {
     try {
       const res = await axios.get(
@@ -32,10 +36,13 @@ const SearchBar = ({ togglebar }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside(searchBarRef));
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside(searchBarRef)
+      );
     };
   }, []);
 
