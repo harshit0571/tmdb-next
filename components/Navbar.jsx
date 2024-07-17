@@ -1,20 +1,23 @@
 "use client";
 import React, { useState } from "react";
-import SearchBar from "./SearchBar";
-import { Link } from "next/link";
+import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-import useFavorites from "../context/FavouritesContext";
-import useBookmark from "../context/BookmarksContext";
+import { FaSearch } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
+import { FaHeart } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useFavorites } from "@/context/FavouritesContext";
+import { useBookmark } from "@/context/BookmarksContext";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
+  const { user, setUser } = useAuth();
   const [searchBar, setSearchBar] = useState(false);
   const [showSignOut, setShowSignOut] = useState(false);
   const navigate = useRouter();
   const { setFavorites } = useFavorites();
   const { setBookmarks } = useBookmark();
-  console.log("hello");
-  const { user, setUser } = useAuth();
   const signOut = () => {
     setUser(null);
     localStorage.removeItem("user");
@@ -23,13 +26,14 @@ const Navbar = () => {
     setFavorites([]);
     setBookmarks([]);
   };
+
   return (
     <div className="w-full bg-darkBlue text-white flex flex-col items-center justify-center relative">
       <div className="w-[100%] lg:w-[85%] xl:w-[70%] flex md:justify-between p-3 md:items-baseline md:flex-row flex-col items-center justify-center md:gap-0 gap-5">
         <div className="flex items-center gap-5 md:flex-row flex-wrap justify-center">
           <div className="flex items-center ">
             <Link href="/">
-              <p className="text-3xl hover:bg-gradient-to-r from-cyan-500 to-cyan-300 tracking-wide font-bold text-transparent bg-clip-text bg-gradient cursor-pointer">
+              <p className="text-3xl bg-gradient-to-r from-cyan-500 to-cyan-300 tracking-wide font-bold text-transparent bg-clip-text bg-gradient cursor-pointer">
                 TMDB{" "}
               </p>
             </Link>
@@ -37,21 +41,21 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* <div className="flex gap-7 items-baseline text-xl ">
-          <i
+        <div className="flex gap-7 items-baseline text-xl ">
+          <FaBookmark
             class="fa fa-bookmark hover:text-teal-400 cursor-pointer"
             aria-hidden="true"
             onClick={() => {
-              user ? navigate("/watchlist") : navigate("/login");
+              user ? navigate.push("/watchlist") : navigate.push("/login");
             }}
-          ></i>
-          <i
+          />
+          <FaHeart
             class="fa fa-heart hover:text-teal-400 cursor-pointer"
             aria-hidden="true"
             onClick={() => {
-              user ? navigate("/favourites") : navigate("/login");
+              user ? navigate.push("/favourites") : navigate.push("/login");
             }}
-          ></i>
+          />
           {user ? (
             <div className="relative inline-block">
               <div
@@ -78,27 +82,27 @@ const Navbar = () => {
           )}
 
           {searchBar ? (
-            <i
+            <ImCross
               class="fa fa-times text-2xl text-blue-400 hover:text-teal-400 cursor-pointer"
               aria-hidden="true"
               onClick={() => {
                 setSearchBar(!searchBar);
               }}
-            ></i>
+            />
           ) : (
-            <i
+            <FaSearch
               class="fa fa-search text-blue-400 text-2xl hover:text-teal-400 cursor-pointer"
               aria-hidden="true"
               onClick={() => {
                 setSearchBar(!searchBar);
               }}
-            ></i>
+            />
           )}
-        </div> */}
+        </div>
       </div>
-      {/* <div className="relative w-full">
+      <div className="relative w-full">
         {searchBar && <SearchBar toggleBar={setSearchBar} />}
-      </div> */}
+      </div>
     </div>
   );
 };

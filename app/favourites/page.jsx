@@ -1,21 +1,21 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useFavorites } from "../context/FavouritesContext";
-import NotFound from "../components/WatchList/NotFound";
-import SavedCard from "../components/WatchList/Savedcard";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useFavorites } from "@/context/FavouritesContext";
+import NotFound from "@/components/WatchList/NotFound";
+import SavedCard from "@/components/WatchList/Savedcard";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Favorites = () => {
   const { favorites, removeFavourite } = useFavorites();
   const { user } = useAuth();
-  const navigation = useNavigate();
+  const navigation = useRouter();
 
   useEffect(() => {
     const checkUser = () => {
       if (!user) {
-        navigation("/login");
+        navigation.push("/login");
       }
     };
     checkUser();

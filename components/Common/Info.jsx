@@ -7,6 +7,7 @@ import { useBookmark } from "@/context/BookmarksContext";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useFavorites } from "@/context/FavouritesContext";
+import { FaBookmark, FaHeart, FaPlay } from "react-icons/fa";
 
 const MovieInfo = ({
   title,
@@ -20,7 +21,6 @@ const MovieInfo = ({
   img,
   type,
 }) => {
-  console.log(genres);
   const { user } = useAuth();
   const { addBookmark, removeBookmark, bookmarkExists } = useBookmark();
   const { addFavourite, removeFavourite, favouriteExists } = useFavorites();
@@ -30,7 +30,7 @@ const MovieInfo = ({
     <div className="flex-col gap-4 w-[100%] lg:w-[80%] text-white py-10">
       <div className="flex flex-col gap-2">
         <div className="flex gap-2 items-baseline flex-col md:flex-row mb-4 md:mb-0">
-          <h1 className="text-white text-4xl ">{title}</h1>
+          <h1 className="text-white text-4xl">{title}</h1>
           <p className="text-gray-200 text-4xl font-400">
             ({date?.split("-")[0]})
           </p>
@@ -41,15 +41,12 @@ const MovieInfo = ({
           </span>
           <p>{date} (IN)</p>
           <div className="flex gap-1 justify-baseline">
-            {/* <i class="fa fa-circle text-xs" aria-hidden="true"></i> */}
-
             {genres?.map((genre, index) => (
-              <span>
+              <span key={index}>
                 {genre.name}
-                {index != genres.length - 1 && ","}
+                {index !== genres.length - 1 && ","}
               </span>
             ))}
-            {/* <i class="fa fa-circle" aria-hidden="true"></i> */}
           </div>
           <p>{convertMinutesToHoursAndMinutes(runtime)}</p>
         </div>
@@ -59,25 +56,23 @@ const MovieInfo = ({
         <div className="flex flex-col font-bold">
           <span>User</span> <span>Score</span>
         </div>
-        <div className="py-1 cursor-pointer px-3 mx-3 bg-darkBlue hover:bg-blue-800">
+        <div className="py-1 cursor-pointer px-3 mx-3 text-blue-500 hover:text-blue-400">
           What's your <span className="border-b-2 border-blue-800">Vibe</span>?
         </div>
       </div>
       {user ? (
         <div className="flex gap-6 mt-6 px-2 items-center cursor-pointer">
           {bookmarkExists(id) ? (
-            <i
-              class="fa fa-bookmark p-3 px-4 rounded-full bg-darkBlue hover:text-teal-400 hover:bg-slate-600 cursor-pointer text-red-500"
+            <FaBookmark
+              className="text-red-500 hover:text-teal-400"
               aria-hidden="true"
-              onClick={() => {
-                removeBookmark(id);
-              }}
-            ></i>
+              onClick={() => removeBookmark(id)}
+            />
           ) : (
-            <i
-              class="fa fa-bookmark p-3 px-4 rounded-full bg-darkBlue hover:bg-slate-600  hover:text-teal-400 cursor-pointer"
+            <FaBookmark
+              className="text-white hover:text-teal-400"
               aria-hidden="true"
-              onClick={() => {
+              onClick={() =>
                 addBookmark({
                   name: title,
                   date: date,
@@ -85,23 +80,21 @@ const MovieInfo = ({
                   id: id,
                   img: img,
                   media_type: type,
-                });
-              }}
-            ></i>
+                })
+              }
+            />
           )}
           {favouriteExists(id) ? (
-            <i
-              class="fa fa-heart p-3 rounded-full bg-darkBlue hover:bg-slate-600  hover:text-teal-400 text-red-500 cursor-pointer"
+            <FaHeart
+              className="text-red-500 hover:text-teal-400"
               aria-hidden="true"
-              onClick={() => {
-                removeFavourite(id);
-              }}
-            ></i>
+              onClick={() => removeFavourite(id)}
+            />
           ) : (
-            <i
-              class="fa fa-heart p-3 rounded-full bg-darkBlue hover:bg-slate-600  hover:text-teal-400 cursor-pointer"
+            <FaHeart
+              className="text-white hover:text-teal-400"
               aria-hidden="true"
-              onClick={() => {
+              onClick={() =>
                 addFavourite({
                   name: title,
                   date: date,
@@ -109,36 +102,37 @@ const MovieInfo = ({
                   id: id,
                   img: img,
                   media_type: type,
-                });
-              }}
-            ></i>
+                })
+              }
+            />
           )}
-
-          <div>
-            <i class="fa fa-play mx-2" aria-hidden="true"></i>
-            Play Trailer
+   <div className="flex items-center">
+            <FaPlay
+              className="mx-2 text-white hover:text-teal-400"
+              aria-hidden="true"
+            />
+            <p> Play Trailer</p>
           </div>
         </div>
       ) : (
         <div className="flex gap-6 mt-6 px-2 items-center cursor-pointer">
-          <i
-            class="fa fa-bookmark p-3 px-4 rounded-full bg-darkBlue hover:text-teal-400 hover:bg-slate-600 cursor-pointer "
+          <FaBookmark
+            className="text-white hover:text-teal-400"
             aria-hidden="true"
-            onClick={() => {
-              navigate.push("/login");
-            }}
-          ></i>
-          <i
-            class="fa fa-heart p-3 rounded-full bg-darkBlue hover:bg-slate-600  hover:text-teal-400 cursor-pointer"
+            onClick={() => navigate.push("/login")}
+          />
+          <FaHeart
+            className="text-white hover:text-teal-400"
             aria-hidden="true"
-            onClick={() => {
-              navigate.push("/login");
-            }}
-          ></i>
+            onClick={() => navigate.push("/login")}
+          />
 
-          <div>
-            <i class="fa fa-play mx-2" aria-hidden="true"></i>
-            Play Trailer
+          <div className="flex items-center">
+            <FaPlay
+              className="mx-2 text-white hover:text-teal-400"
+              aria-hidden="true"
+            />
+            <p> Play Trailer</p>
           </div>
         </div>
       )}
@@ -147,11 +141,6 @@ const MovieInfo = ({
         <p className="italic text-gray-300">{tagline}</p>
         <p className="text-xl">Overview</p>
         <p className="text-gray-300">{overview}</p>
-      </div>
-      <div className="flex justify-between">
-        <div className="flex-col">
-          <p></p>
-        </div>
       </div>
     </div>
   );

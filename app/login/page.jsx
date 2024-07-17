@@ -25,7 +25,7 @@ const Login = () => {
     } else {
       setUser(username);
       localStorage.setItem("user", JSON.stringify(username));
-      navigation("/");
+      navigation.push("/");
     }
     e.preventDefault();
   };

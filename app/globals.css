@@ -6,3 +6,53 @@ body {
   box-sizing: border-box;
   padding: 0;
 }
+
+@media (max-width: 640px) {
+  .placeholder-sm::placeholder {
+    content: "Search...";
+  }
+}
+
+@media (min-width: 641px) {
+  .placeholder-lg::placeholder {
+    content: "Search for a movie, tv show, person.......";
+  }
+}
+
+.background-bottom-right {
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-position-y: top;
+  background-size: 100% 200%;
+}
+
+@media (max-width: 1444px) {
+  .background-bottom-right {
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-position-y: top;
+    background-size: 100% 200%;
+  }
+}
+
+@media (max-width: 1444px) {
+  .background-bottom-right {
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-position-y: top;
+    background-size: 100% 100%;
+  }
+
+}
+@media (max-width: 760px) {
+  .background-bottom-right {
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-position-y: top;
+    background-size: 0% 0%;
+  }
+}

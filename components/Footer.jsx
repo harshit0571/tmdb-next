@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useAuth } from "@/context/AuthContext";
-import { Link } from "next";
+import Link from "next/link";
 
 const footerData = [
   {
